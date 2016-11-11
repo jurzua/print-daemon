@@ -1,0 +1,78 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>cl.uautonoma</groupId>
+	<artifactId>print-daemon</artifactId>
+	<packaging>jar</packaging>
+	<version>1</version>
+	<name>print-daemon</name>
+
+  	<properties>
+  		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<oak.version>1.0.12</oak.version>
+		<tomcat.version>7.0.40</tomcat.version>
+		<tika.version>1.7</tika.version>
+		<slf4j.api.version>1.6.6</slf4j.api.version>
+		<slf4j.version>1.7.4</slf4j.version>
+		<basex.version>8.2.2</basex.version>
+	</properties>
+	
+	<dependencies>
+	
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>log4j</groupId>
+		    <artifactId>log4j</artifactId>
+		    <version>1.2.17</version>
+		</dependency>		
+		
+	</dependencies>
+	<!-- 
+	<repositories>
+		<repository>
+			<id>prime-repo</id>
+			<name>PrimeFaces Maven Repository</name>
+			<url>http://repository.primefaces.org</url>
+		</repository>
+	</repositories>
+	 -->
+	<build>
+		<finalName>ianus-ingest-web</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+			</plugin>
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>8.1.9.v20130131</version>
+				<configuration>
+					<webAppConfig>
+						<contextPath>/ianus-ingest-web</contextPath>
+					</webAppConfig>
+					<scanIntervalSeconds>5</scanIntervalSeconds>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
+
+
