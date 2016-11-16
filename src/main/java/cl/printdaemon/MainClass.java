@@ -8,8 +8,7 @@ public class MainClass {
 		
 		String[] cmd = {"wmic printjob get jobid, document, jobstatus"};
 		
-		
-	    try {
+		try {
 	    	
 	    	Process pb = Runtime.getRuntime().exec(cmd);
 		    pb.waitFor();
