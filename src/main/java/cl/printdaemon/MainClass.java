@@ -48,6 +48,7 @@ public class MainClass {
 		try {
 			InetAddress localMachine = java.net.InetAddress.getLocalHost();
 			machine = localMachine.getHostName();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
