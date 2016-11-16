@@ -4,21 +4,33 @@ import cl.printdaemon.utils.WmicPrintJobOutput;
 
 public class MainClass {
 
-	public static void main(String[] args){
+	public static void main(String[] args) throws InterruptedException{
 		
-		String[] cmd = {"wmic printjob get jobid, document, jobstatus"};
+		String username = System.getProperty("user.name");
+		
+		System.out.println(username);
 		
 		try {
-	    	
-	    	Process pb = Runtime.getRuntime().exec(cmd);
-		    pb.waitFor();
-		    WmicPrintJobOutput output = new WmicPrintJobOutput(pb);
-		    
+			java.net.InetAddress localMachine = java.net.InetAddress.getLocalHost();
+			System.out.println("Hostname of local machine: " + localMachine.getHostName());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		
-		System.exit(0);
+		String[] cmd = {"wmic", "printjob", "get"};
+		/*
+		while(true){
+            Thread.sleep(500);
+			try {
+		    	System.out.println("*");
+		    	Process pb = Runtime.getRuntime().exec(cmd);
+			    pb.waitFor();
+			    WmicPrintJobOutput output = new WmicPrintJobOutput(pb);
+			    
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}*/
 	}
 }
