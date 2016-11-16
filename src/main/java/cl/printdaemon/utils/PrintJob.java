@@ -17,6 +17,7 @@ public class PrintJob {
 	private String jobStatus; 
 	private String owner;
 	private String printer;
+	private String totalPages;
 	
 	public PrintJob(String line){
 		String[] array = line.split(",");
@@ -30,10 +31,11 @@ public class PrintJob {
 		this.jobStatus = array[3];
 		this.owner = array[4];
 		this.printer = array[5];
+		this.totalPages = array[6];
 	}
 	
 	public String toParams(){
-		return "printer=" + printer + "&document=" + this.document + "&jobId=" + jobId;
+		return "printer=" + printer + "&document=" + this.document + "&jobId=" + jobId + "&pagesNumber=" + totalPages;
 	}
 	
 	public String getNode() {
