@@ -16,6 +16,7 @@ public class PrintJob {
 	private String document;
 	private String jobStatus; 
 	private String owner;
+	private String printer;
 	
 	public PrintJob(String line){
 		String[] array = line.split(",");
@@ -28,6 +29,11 @@ public class PrintJob {
 		this.document = array[2];
 		this.jobStatus = array[3];
 		this.owner = array[4];
+		this.printer = array[5];
+	}
+	
+	public String toParams(){
+		return "printer=" + printer + "&document=" + this.document + "&jobId=" + jobId;
 	}
 	
 	public String getNode() {
@@ -59,5 +65,10 @@ public class PrintJob {
 	}
 	public void setOwner(String owner) {
 		this.owner = owner;
+	}
+	
+	@Override
+	public String toString(){
+		return "PrintJob [jobId="+ jobId +", document="+ document +", owner=" + owner + "]";
 	}
 }

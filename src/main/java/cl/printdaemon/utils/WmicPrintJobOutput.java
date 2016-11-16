@@ -32,4 +32,8 @@ public class WmicPrintJobOutput extends CmdOutput{
 			}
 		}
 	}
+	
+	public List<PrintJob> getPrintJobList(){
+		return printJobList;
+	}
 }
