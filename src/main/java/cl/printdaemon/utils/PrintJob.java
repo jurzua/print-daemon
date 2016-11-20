@@ -1,5 +1,8 @@
 package cl.printdaemon.utils;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 /**
  * Example output:
  * 
@@ -40,8 +43,11 @@ public class PrintJob {
 		
 	}
 	
-	public String toParams(){
-		return "printer=" + printer + "&document=" + this.document + "&jobId=" + jobId + "&pagesNumber=" + totalPages;
+	public String toParams() throws UnsupportedEncodingException{
+		return "printer=" + URLEncoder.encode(printer, "UTF-8") + 
+				"&document=" + URLEncoder.encode(document, "UTF-8") + 
+				"&jobId=" + jobId + 
+				"&pagesNumber=" + totalPages;
 	}
 	
 	public String getNode() {

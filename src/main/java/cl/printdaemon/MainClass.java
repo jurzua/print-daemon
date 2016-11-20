@@ -3,9 +3,11 @@ package cl.printdaemon;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.List;
 
 import cl.printdaemon.utils.PrintJob;
@@ -46,8 +48,9 @@ public class MainClass {
 	 * http://localhost:8080/print-management/printServlet?userName=jurzua&computer=PC01&printer=Lexon_01&document=tesis.docx
 	 * 
 	 * @param list
+	 * @throws UnsupportedEncodingException 
 	 */
-	public static void processPrintJobs(List<PrintJob> list){
+	public static void processPrintJobs(List<PrintJob> list) throws UnsupportedEncodingException{
 		String userName = System.getProperty("user.name");
 		String machine = null;
 		try {
@@ -58,13 +61,14 @@ public class MainClass {
 			e.printStackTrace();
 		}
 		
-		String params01 = "userName=" + userName + "&computer=" + machine;
+		String params01 = "userName=" + userName + "&computer=" + URLEncoder.encode(machine, "UTF-8");
+		
 		
 		for(PrintJob job : list){
 			try {
+				//params01 = URLEncoder.encode(params01, "UTF-8");
 				String urlString = PRINT_MANAGER_LOCATION + params01 + "&" + job.toParams();
-				String encodedURL=java.net.URLEncoder.encode(urlString,"UTF-8");
-				URL url = new URL(encodedURL);
+				URL url = new URL(urlString);
 				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 				conn.setRequestMethod("GET");
 				
