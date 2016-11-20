@@ -20,7 +20,7 @@ public class MainClass {
 		String[] cmd = {"wmic", "printjob", "get", "jobid,", "document,", "jobstatus,", "owner,", "name,", "totalpages"};
 		
 		while(true){
-            Thread.sleep(500);
+            Thread.sleep(1000);
 			try {
 		    	System.out.println("Searching for printJob ...");
 		    	//aquí ejecuto el proceso
@@ -34,7 +34,7 @@ public class MainClass {
 			    	System.out.println(output.getPrintJobList().size() + " printJobs found");
 			    	processPrintJobs(output.getPrintJobList());
 			    }
-			    System.out.println();
+			    //System.out.println();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

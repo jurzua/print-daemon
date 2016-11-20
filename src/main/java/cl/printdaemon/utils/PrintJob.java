@@ -21,9 +21,7 @@ public class PrintJob {
 	
 	public PrintJob(String line){
 		String[] array = line.split(",");
-		for(String item : array){
-			System.out.println(item);
-		}
+		System.out.println("array.length=" + array.length + "\tProcessing= " + line);
 		
 		this.node = array[0];
 		this.jobId = array[1];

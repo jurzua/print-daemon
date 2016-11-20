@@ -21,7 +21,6 @@ public class WmicPrintJobOutput extends CmdOutput{
 		if(StringUtils.isEmpty(this.errorOutput)){
 			String line=null;
 			BufferedReader bufReader = new BufferedReader(new StringReader(this.standardOutput));
-			//System.out.println("Processing standardOutput ...");
 			
 			while( (line=bufReader.readLine()) != null ) {
 				if(StringUtils.isNotEmpty(line) && !line.startsWith("Node,Document,JobId,JobStatus,Owner")){
@@ -36,7 +35,6 @@ public class WmicPrintJobOutput extends CmdOutput{
 			}	
 		}else{
 			System.out.println("Problem executing wmic: " + this.errorOutput);
-			System.out.println("Command executed: " + this.pb.toString());
 		}
 	}
 	
