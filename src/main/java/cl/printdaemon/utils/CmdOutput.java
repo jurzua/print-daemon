@@ -15,11 +15,14 @@ public class CmdOutput {
 	public String standardOutput;
 	public String errorOutput;
 	public int exitValue;
+	public Process pb;
+	
 	
 	public CmdOutput(Process pb) throws IOException{
 		this.standardOutput = loadStream(pb.getInputStream());
 		this.errorOutput = loadStream(pb.getErrorStream());
 		this.exitValue = pb.exitValue();
+		this.pb = pb;
 	}
 	
 	public String loadStream(InputStream in) throws IOException{
