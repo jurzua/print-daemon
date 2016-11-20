@@ -20,7 +20,7 @@ public class WmicPrintJobOutput extends CmdOutput{
 	private void load() throws IOException{
 		String line=null;
 		BufferedReader bufReader = new BufferedReader(new StringReader(this.standardOutput));
-		//System.out.println("Processing standardOutput ...");
+		System.out.println(this.standardOutput);
 		
 		while( (line=bufReader.readLine()) != null ) {
 			if(StringUtils.isNotEmpty(line) && !line.startsWith("Node,Document,JobId,JobStatus,Owner")){
