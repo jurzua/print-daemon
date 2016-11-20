@@ -17,7 +17,7 @@ public class MainClass {
 	
 	public static void main(String[] args) throws InterruptedException{
 		//wmic printjob get jobid, document, jobstatus, owner, name, totalpages
-		String[] cmd = {"wmic", "printjob", "get", "jobid,", "document,", "jobstatus,", "owner,", "name", "totalpages"};
+		String[] cmd = {"wmic", "printjob", "get", "jobid,", "document,", "jobstatus,", "owner,", "name,", "totalpages"};
 		
 		while(true){
             Thread.sleep(500);
