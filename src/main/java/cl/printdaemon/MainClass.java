@@ -63,7 +63,8 @@ public class MainClass {
 		for(PrintJob job : list){
 			try {
 				String urlString = PRINT_MANAGER_LOCATION + params01 + "&" + job.toParams();
-				URL url = new URL(urlString);
+				String encodedURL=java.net.URLEncoder.encode(urlString,"UTF-8");
+				URL url = new URL(encodedURL);
 				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 				conn.setRequestMethod("GET");
 				
