@@ -1,0 +1,3 @@
+
+Node,Caption,Color,DataType,Description,Document,DriverName,ElapsedTime,HostPrintQueue,InstallDate,JobId,JobStatus,Name,Notify,Owner,PagesPrinted,PaperLength,PaperSize,PaperWidth,Parameters,PrintProcessor,Priority,Size,SizeHigh,StartTime,Status,StatusMask,TimeSubmitted,TotalPages,UntilTime
+DESKTOP-EREDE67,Microsoft Print to PDF, 4,Color,RAW,Microsoft Print to PDF, 4,Microsoft Word - Informe Trabajo de Titulo.docx,Microsoft Print To PDF,,\\DESKTOP-EREDE67,,4,Trabajos en cola | Imprimiendo,Microsoft Print to PDF, 4,Ricardo,Ricardo,0,2794,Letter 8 1/2 x 11 in,2159,,MS_XPS_PROC,1,0,0,,OK,8216,20161116101806.844000-180,48,

@@ -3,8 +3,14 @@ package cl.printdaemon.utils;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
 
 public class WmicPrintJobOutput extends CmdOutput{
+	
+	private List<PrintJob> printJobList = new ArrayList<PrintJob>();
 	
 	public WmicPrintJobOutput(Process pb) throws IOException{
 		super(pb);
@@ -17,7 +23,18 @@ public class WmicPrintJobOutput extends CmdOutput{
 		//System.out.println("Processing standardOutput ...");
 		
 		while( (line=bufReader.readLine()) != null ) {
-			System.out.println(line);
+			if(StringUtils.isNotEmpty(line) && !line.startsWith("Node,Document,JobId,JobStatus,Owner")){
+				try {
+					PrintJob job = new PrintJob(line);
+					printJobList.add(job);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 		}
+	}
+	
+	public List<PrintJob> getPrintJobList(){
+		return printJobList;
 	}
 }
