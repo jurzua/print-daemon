@@ -33,7 +33,7 @@ public class PrintJob {
 		this.document = array[1];
 		this.jobId = array[2];
 		this.printer = array[3];
-		this.totalPages = array[5];
+		this.totalPages = array[4];
 		//this.jobStatus = array[3];
 		//this.owner = array[4];
 		//this.printer = array[5];

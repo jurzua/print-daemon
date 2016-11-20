@@ -29,7 +29,7 @@ public class WmicPrintJobOutput extends CmdOutput{
 			BufferedReader bufReader = new BufferedReader(new StringReader(this.standardOutput));
 			
 			while( (line=bufReader.readLine()) != null ) {
-				if(StringUtils.isNotEmpty(line) && !line.startsWith("Node,Document,JobId,JobStatus,Name,Owner,TotalPages")){
+				if(StringUtils.isNotEmpty(line) && !line.startsWith("Node,Document,JobId,Name,TotalPages")){
 					try {
 						PrintJob job = new PrintJob(line);
 						printJobList.add(job);
