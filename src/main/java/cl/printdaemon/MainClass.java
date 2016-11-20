@@ -13,18 +13,22 @@ import cl.printdaemon.utils.WmicPrintJobOutput;
 
 public class MainClass {
 
-	public static String location = "http://localhost:8080/print-management/printServlet?";
+	public static String PRINT_MANAGER_LOCATION = "http://localhost:8080/print-management/printServlet?";
 	
 	public static void main(String[] args) throws InterruptedException{
-		//wmic printjob get jobid, document, jobstatus, owner
+		//wmic printjob get jobid, document, jobstatus, owner, name, totalpages
 		String[] cmd = {"wmic", "printjob", "get", "jobid,", "document,", "jobstatus,", "owner,", "name", "totalpages"};
 		
 		while(true){
             Thread.sleep(500);
 			try {
 		    	System.out.println("Searching for printJob ...");
+		    	//aquí ejecuto el proceso
 		    	Process pb = Runtime.getRuntime().exec(cmd);
-			    pb.waitFor();
+			    //aquí espero que el proceso este listo
+		    	pb.waitFor();
+		    	//cuando el proceso este listo, genero una lista de PrintJob desde la salida 
+		    	//estandar del programa.
 			    WmicPrintJobOutput output = new WmicPrintJobOutput(pb);
 			    if(!output.getPrintJobList().isEmpty()){
 			    	System.out.println(output.getPrintJobList().size() + " printJobs found");
@@ -57,7 +61,7 @@ public class MainClass {
 		
 		for(PrintJob job : list){
 			try {
-				String urlString = location + params01 + "&" + job.toParams();
+				String urlString = PRINT_MANAGER_LOCATION + params01 + "&" + job.toParams();
 				URL url = new URL(urlString);
 				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 				conn.setRequestMethod("GET");
