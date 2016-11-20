@@ -31,6 +31,7 @@ public class WmicPrintJobOutput extends CmdOutput{
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
+
 				}
 			}	
 		}else{
