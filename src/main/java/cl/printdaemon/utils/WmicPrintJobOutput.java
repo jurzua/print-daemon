@@ -14,7 +14,8 @@ public class WmicPrintJobOutput extends CmdOutput{
 	private void load() throws IOException{
 		String line=null;
 		BufferedReader bufReader = new BufferedReader(new StringReader(this.standardOutput));
-		System.out.println("Processing standardOutput ...");
+		//System.out.println("Processing standardOutput ...");
+		
 		while( (line=bufReader.readLine()) != null ) {
 			System.out.println(line);
 		}
