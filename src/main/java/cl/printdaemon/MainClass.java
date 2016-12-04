@@ -23,7 +23,7 @@ public class MainClass {
 		String[] cmd = {"wmic", "printjob", "get", "jobid,", "document,", "name,", "totalpages", "/format:csv"};
 		
 		while(true){
-            Thread.sleep(1000);
+            Thread.sleep(800);
 			try {
 		    	System.out.println("Searching for printJob ...");
 		    	//aquí ejecuto el proceso

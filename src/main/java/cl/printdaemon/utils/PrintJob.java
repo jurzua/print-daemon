@@ -9,7 +9,7 @@ import java.net.URLEncoder;
  * Node,Document,JobId,JobStatus,Owner
  * DESKTOP-EREDE67,Microsoft Word - Informe Trabajo de Titulo.docx,6,Trabajos en cola | Imprimiendo,Ricardo
  * 
- * @author jurzua
+ * @author rurzua
  *
  */
 public class PrintJob {
@@ -36,7 +36,7 @@ public class PrintJob {
 		this.document = array[1];
 		this.jobId = array[2];
 		this.printer = array[3];
-		this.totalPages = "10";
+		this.totalPages = array[5];
 		//this.jobStatus = array[3];
 		//this.owner = array[4];
 		//this.printer = array[5];
