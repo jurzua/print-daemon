@@ -5,8 +5,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
-import org.apache.commons.lang.StringUtils;
-
 /**
  * 
  * wmic printjob get jobid, document, jobstatus, owner /format:csv 1> print_table_part.txt 
@@ -28,7 +26,7 @@ public class FileReader {
 
 			//Read File Line By Line
 			while ((strLine = br.readLine()) != null)   {
-				if(StringUtils.isNotEmpty(strLine) && !strLine.startsWith("Node,Document,JobId,JobStatus,Owner")){
+				if(StringIsNotEmpty(strLine) && !strLine.startsWith("Node,Document,JobId,JobStatus,Owner")){
 					processLine(strLine);
 				}
 			}
@@ -38,6 +36,10 @@ public class FileReader {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static boolean StringIsNotEmpty(String s){
+		return s != null && s.length() > 0;
 	}
 	
 	

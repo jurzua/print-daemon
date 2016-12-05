@@ -6,7 +6,7 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
+import cl.printdaemon.FileReader;
 
 public class WmicPrintJobOutput extends CmdOutput{
 	
@@ -22,7 +22,7 @@ public class WmicPrintJobOutput extends CmdOutput{
 		BufferedReader bufReader = new BufferedReader(new StringReader(this.standardOutput));
 		System.out.println("Processing standardOutput ...");
 		while( (line=bufReader.readLine()) != null ) {
-			if(StringUtils.isNotEmpty(line) && !line.startsWith("Node,Document,JobId,JobStatus,Owner")){
+			if(FileReader.StringIsNotEmpty(line) && !line.startsWith("Node,Document,JobId,JobStatus,Owner")){
 				try {
 					PrintJob job = new PrintJob(line);
 					printJobList.add(job);
