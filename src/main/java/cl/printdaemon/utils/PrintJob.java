@@ -1,12 +1,15 @@
 package cl.printdaemon.utils;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 /**
  * Example output:
  * 
  * Node,Document,JobId,JobStatus,Owner
  * DESKTOP-EREDE67,Microsoft Word - Informe Trabajo de Titulo.docx,6,Trabajos en cola | Imprimiendo,Ricardo
  * 
- * @author jurzua
+ * @author rurzua
  *
  */
 public class PrintJob {
@@ -19,23 +22,32 @@ public class PrintJob {
 	private String printer;
 	private String totalPages;
 	
+	/**
+	 *  array.length=7	Processing= Node,Document,JobId,Name,TotalPages
+		array.length=8	Processing= DESKTOP-EREDE67,Microsoft Word - Informe Trabajo de Titulo.docx,16,Trabajos en cola,Microsoft Print to PDF, 16,Ricardo,2
+
+	 * @param line
+	 */
 	public PrintJob(String line){
 		String[] array = line.split(",");
-		for(String item : array){
-			System.out.println(item);
-		}
+		System.out.println("array.length=" + array.length + "\tProcessing= " + line);
 		
 		this.node = array[0];
-		this.jobId = array[1];
-		this.document = array[2];
-		this.jobStatus = array[3];
-		this.owner = array[4];
-		this.printer = array[5];
-		this.totalPages = array[6];
+		this.document = array[1];
+		this.jobId = array[2];
+		this.printer = array[3];
+		this.totalPages = array[5];
+		//this.jobStatus = array[3];
+		//this.owner = array[4];
+		//this.printer = array[5];
+		
 	}
 	
-	public String toParams(){
-		return "printer=" + printer + "&document=" + this.document + "&jobId=" + jobId + "&pagesNumber=" + totalPages;
+	public String toParams() throws UnsupportedEncodingException{
+		return "printer=" + URLEncoder.encode(printer, "UTF-8") + 
+				"&document=" + URLEncoder.encode(document, "UTF-8") + 
+				"&jobId=" + jobId + 
+				"&pagesNumber=" + totalPages;
 	}
 	
 	public String getNode() {

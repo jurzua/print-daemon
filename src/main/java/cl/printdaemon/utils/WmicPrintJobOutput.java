@@ -17,19 +17,29 @@ public class WmicPrintJobOutput extends CmdOutput{
 		load();
 	}
 	
+	/**
+	 * array.length=7	Processing= Node,Document,JobId,JobStatus,Name,Owner,TotalPages
+		array.length=8	Processing= DESKTOP-EREDE67,Microsoft Word - Informe Trabajo de Titulo.docx,16,Trabajos en cola,Microsoft Print to PDF, 16,Ricardo,2
+
+	 * @throws IOException
+	 */
 	private void load() throws IOException{
-		String line=null;
-		BufferedReader bufReader = new BufferedReader(new StringReader(this.standardOutput));
-		System.out.println("Processing standardOutput ...");
-		while( (line=bufReader.readLine()) != null ) {
-			if(FileReader.StringIsNotEmpty(line) && !line.startsWith("Node,Document,JobId,JobStatus,Owner")){
-				try {
-					PrintJob job = new PrintJob(line);
-					printJobList.add(job);
-				} catch (Exception e) {
-					e.printStackTrace();
+		if(!FileReader.StringIsNotEmpty(this.errorOutput)){
+			String line=null;
+			BufferedReader bufReader = new BufferedReader(new StringReader(this.standardOutput));
+			
+			while( (line=bufReader.readLine()) != null ) {
+				if(FileReader.StringIsNotEmpty(line) && !line.startsWith("Node,Document,JobId,Name,TotalPages")){
+					try {
+						PrintJob job = new PrintJob(line);
+						printJobList.add(job);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
-			}
+			}	
+		}else{
+			System.out.println("Problem executing wmic: " + this.errorOutput);
 		}
 	}
 	

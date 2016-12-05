@@ -3,9 +3,11 @@ package cl.printdaemon;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.List;
 
 import cl.printdaemon.utils.PrintJob;
@@ -13,24 +15,29 @@ import cl.printdaemon.utils.WmicPrintJobOutput;
 
 public class MainClass {
 
-	public static String location = "http://localhost:8080/print-management/printServlet?";
+	public static String PRINT_MANAGER_LOCATION = "http://localhost:8080/print-management/printServlet?";
 	
 	public static void main(String[] args) throws InterruptedException{
-		//wmic printjob get jobid, document, jobstatus, owner
-		String[] cmd = {"wmic", "printjob", "get", "jobid,", "document,", "jobstatus,", "owner,", "name", "totalpages"};
+		//wmic printjob get jobid, document, jobstatus, owner, name, totalpages
+		//Node,Document,JobId,Name,TotalPages
+		String[] cmd = {"wmic", "printjob", "get", "jobid,", "document,", "name,", "totalpages", "/format:csv"};
 		
 		while(true){
-            Thread.sleep(500);
+            Thread.sleep(800);
 			try {
 		    	System.out.println("Searching for printJob ...");
+		    	//aquí ejecuto el proceso
 		    	Process pb = Runtime.getRuntime().exec(cmd);
-			    pb.waitFor();
+			    //aquí espero que el proceso este listo
+		    	pb.waitFor();
+		    	//cuando el proceso este listo, genero una lista de PrintJob desde la salida 
+		    	//estandar del programa.
 			    WmicPrintJobOutput output = new WmicPrintJobOutput(pb);
 			    if(!output.getPrintJobList().isEmpty()){
 			    	System.out.println(output.getPrintJobList().size() + " printJobs found");
 			    	processPrintJobs(output.getPrintJobList());
 			    }
-			    System.out.println();
+			    //System.out.println();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -41,8 +48,9 @@ public class MainClass {
 	 * http://localhost:8080/print-management/printServlet?userName=jurzua&computer=PC01&printer=Lexon_01&document=tesis.docx
 	 * 
 	 * @param list
+	 * @throws UnsupportedEncodingException 
 	 */
-	public static void processPrintJobs(List<PrintJob> list){
+	public static void processPrintJobs(List<PrintJob> list) throws UnsupportedEncodingException{
 		String userName = System.getProperty("user.name");
 		String machine = null;
 		try {
@@ -53,11 +61,13 @@ public class MainClass {
 			e.printStackTrace();
 		}
 		
-		String params01 = "userName=" + userName + "&computer=" + machine;
+		String params01 = "userName=" + userName + "&computer=" + URLEncoder.encode(machine, "UTF-8");
+		
 		
 		for(PrintJob job : list){
 			try {
-				String urlString = location + params01 + "&" + job.toParams();
+				//params01 = URLEncoder.encode(params01, "UTF-8");
+				String urlString = PRINT_MANAGER_LOCATION + params01 + "&" + job.toParams();
 				URL url = new URL(urlString);
 				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 				conn.setRequestMethod("GET");
