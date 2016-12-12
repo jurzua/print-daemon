@@ -4,12 +4,14 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 /**
+ * Esta clase es la representacón de un trabajo de impresión, que es generado por la clase WmicPrintJobOutput.
+ * 
  * Example output:
  * 
  * Node,Document,JobId,JobStatus,Owner
  * DESKTOP-EREDE67,Microsoft Word - Informe Trabajo de Titulo.docx,6,Trabajos en cola | Imprimiendo,Ricardo
  * 
- * @author rurzua
+ * @author Ricardo Urzua
  *
  */
 public class PrintJob {

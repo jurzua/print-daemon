@@ -8,6 +8,15 @@ import java.util.List;
 
 import cl.printdaemon.FileReader;
 
+/**
+ * 
+ * Esta clase es responsable de procesar la salida del programa WMIC.
+ * Si el programa WMIC detecta trabajos de impresión, la lista printJobList no estará vacía.
+ * Cada elemento de la lista printJobList representa un trabajo de impresión.
+ * 
+ * @author Ricardo Urzua
+ *
+ */
 public class WmicPrintJobOutput extends CmdOutput{
 	
 	private List<PrintJob> printJobList = new ArrayList<PrintJob>();
